@@ -15,14 +15,13 @@ export default class DependencyGraphSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName("Setting #1")
-			.setDesc("It's a secret")
-			.addText((text) =>
-				text
-					.setPlaceholder("Enter your secret")
-					.setValue(this.plugin.settings.mySetting)
+			.setName("Debug")
+			.setDesc("Enable debug mode")
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.debug)
 					.onChange(async (value) => {
-						this.plugin.settings.mySetting = value;
+						this.plugin.settings.debug = value;
 						await this.plugin.saveSettings();
 					})
 			);

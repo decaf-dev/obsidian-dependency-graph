@@ -7,11 +7,13 @@
 
 	interface AppProps {
 		app: ObsidianApp;
+		enableDebug: boolean;
 		parentNote: TFile;
 		forwardProperty: string;
 	}
 
-	const { app, parentNote, forwardProperty }: AppProps = $props();
+	const { app, enableDebug, parentNote, forwardProperty }: AppProps =
+		$props();
 
 	let svgRef: SVGSVGElement | undefined = undefined;
 	let simulation: d3.Simulation<D3Node, D3Link> | null = null;
@@ -32,6 +34,11 @@
 
 		// Get all backlinks to the parent note
 		const { nodes, links } = getD3Links(app, parentNote, forwardProperty);
+
+		if (enableDebug) {
+			console.log({ nodes });
+			console.log({ links });
+		}
 
 		// Define arrowhead marker
 		svg.append("defs")
