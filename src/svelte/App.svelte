@@ -7,12 +7,12 @@
 
 	interface AppProps {
 		app: ObsidianApp;
-		enableDebug: boolean;
-		parentNote: TFile;
+		parentFile: TFile;
 		forwardProperty: string;
+		shouldDebug: boolean;
 	}
 
-	const { app, enableDebug, parentNote, forwardProperty }: AppProps =
+	const { app, shouldDebug, parentFile, forwardProperty }: AppProps =
 		$props();
 
 	let svgRef: SVGSVGElement | undefined = undefined;
@@ -29,13 +29,13 @@
 
 		const svg = d3.select<SVGSVGElement, unknown>(svgRef);
 
-		const width = +svg.attr("width");
-		const height = +svg.attr("height");
+		const width = parseInt(svg.attr("width"));
+		const height = parseInt(svg.attr("height"));
 
 		// Get all backlinks to the parent note
-		const { nodes, links } = getD3Links(app, parentNote, forwardProperty);
+		const { nodes, links } = getD3Links(app, parentFile, forwardProperty);
 
-		if (enableDebug) {
+		if (shouldDebug) {
 			console.log({ nodes });
 			console.log({ links });
 		}

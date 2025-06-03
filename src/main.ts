@@ -4,11 +4,11 @@ import DependencyGraphSettingTab from "./obsidian/DependencyGraphSettingTab";
 import App from "./svelte/App.svelte";
 
 interface DependencyGraphPluginSettings {
-	debug: boolean;
+	shouldDebug: boolean;
 }
 
 const DEFAULT_SETTINGS: DependencyGraphPluginSettings = {
-	debug: false,
+	shouldDebug: false,
 };
 
 export default class DependencyGraphPlugin extends Plugin {
@@ -34,15 +34,15 @@ export default class DependencyGraphPlugin extends Plugin {
 			throw new Error("parent is required");
 		}
 
-		let forwardProperty = yaml.forward;
+		const forwardProperty = yaml.forward;
 		if (!forwardProperty) {
 			throw new Error("forward is required");
 		}
 
 		if (Array.isArray(parent)) {
-			parent = parent[0];
+			parent = parent[0][0];
 		}
-		parent += ".md";
+
 		return { parent, forwardProperty };
 	}
 
@@ -51,7 +51,7 @@ export default class DependencyGraphPlugin extends Plugin {
 
 		this.registerMarkdownCodeBlockProcessor(
 			"dependency-graph",
-			(source, el) => {
+			(source, el, ctx) => {
 				let parsed: { parent: string; forwardProperty: string };
 
 				try {
@@ -68,9 +68,12 @@ export default class DependencyGraphPlugin extends Plugin {
 
 				const { parent, forwardProperty } = parsed;
 
-				const parentNote = this.app.vault.getFileByPath(parent);
-				if (!parentNote) {
-					el.innerHTML = "Parent note not found";
+				const parentFile = this.app.metadataCache.getFirstLinkpathDest(
+					parent,
+					ctx.sourcePath
+				);
+				if (!parentFile) {
+					el.innerHTML = "Parent file not found";
 					return;
 				}
 
@@ -79,8 +82,8 @@ export default class DependencyGraphPlugin extends Plugin {
 					return;
 				}
 
-				if (this.settings.debug) {
-					console.log({ parentNote });
+				if (this.settings.shouldDebug) {
+					console.log({ parentFile });
 					console.log({ forwardProperty });
 				}
 
@@ -93,9 +96,9 @@ export default class DependencyGraphPlugin extends Plugin {
 					target: el,
 					props: {
 						app: this.app,
-						enableDebug: this.settings.debug,
-						parentNote,
+						parentFile,
 						forwardProperty,
+						shouldDebug: this.settings.shouldDebug,
 					},
 				});
 			}
