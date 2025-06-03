@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"id": "dependency-graph",
+	"name": "Dependency Graph",
+	"version": "0.0.1",
+	"minAppVersion": "1.8.0",
+	"description": "Dependency Graph uses D3.js to visualize how your notes depend on one another",
+	"author": "DecafDev",
+	"authorUrl": "https://github.com/decaf-dev",
+	"fundingUrl": "https://ko-fi.com/decaf_dev",
 	"isDesktopOnly": false
 }

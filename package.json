@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
-	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+	"name": "obsidian-dependency-graph",
+	"version": "0.0.1",
+	"description": "Dependency Graph uses D3.js to visualize how your notes depend on one another",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
@@ -10,10 +10,11 @@
 		"check": "svelte-check --tsconfig ./tsconfig.json"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "DecafDev",
 	"license": "MIT",
 	"devDependencies": {
 		"@tsconfig/svelte": "^5.0.4",
+		"@types/d3": "^7.4.3",
 		"@types/node": "^22.15.17",
 		"@typescript-eslint/eslint-plugin": "8.32.0",
 		"@typescript-eslint/parser": "8.32.0",
@@ -27,6 +28,7 @@
 		"typescript": "5.8.3"
 	},
 	"dependencies": {
-		"svelte": "^5.28.2"
+		"d3": "^7.9.0",
+		"svelte": "^5.33.14"
 	}
 }
