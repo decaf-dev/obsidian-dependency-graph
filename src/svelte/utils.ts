@@ -30,7 +30,12 @@ export function getD3Links(
 			const propertyValue = fileCache?.frontmatter?.[forwardProperty];
 			if (!propertyValue) continue;
 
-			if (propertyValue.includes(parentNote.basename)) {
+			let extractedValue = propertyValue;
+			if (Array.isArray(propertyValue)) {
+				extractedValue = propertyValue[0];
+			}
+
+			if (extractedValue.includes(parentNote.basename)) {
 				const sourceNode: D3Node = { id: sourceFile.basename };
 				nodes.push(sourceNode);
 
