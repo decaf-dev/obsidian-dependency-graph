@@ -10,9 +10,6 @@ export function getD3Links(
 	links: D3Link[];
 } {
 	const backlinks = app.metadataCache.resolvedLinks;
-	console.log({
-		resolvedLinks: backlinks,
-	});
 
 	const nodes: D3Node[] = [];
 	const links: D3Link[] = [];
