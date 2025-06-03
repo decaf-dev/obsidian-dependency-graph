@@ -9,10 +9,10 @@
 		app: ObsidianApp;
 		parentFile: TFile;
 		forwardProperty: string;
-		shouldDebug: boolean;
+		enableDebug: boolean;
 	}
 
-	const { app, shouldDebug, parentFile, forwardProperty }: AppProps =
+	const { app, enableDebug, parentFile, forwardProperty }: AppProps =
 		$props();
 
 	let svgRef: SVGSVGElement | undefined = undefined;
@@ -35,7 +35,7 @@
 		// Get all backlinks to the parent note
 		const { nodes, links } = getD3Links(app, parentFile, forwardProperty);
 
-		if (shouldDebug) {
+		if (enableDebug) {
 			console.log({ nodes });
 			console.log({ links });
 		}

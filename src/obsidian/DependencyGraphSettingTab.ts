@@ -19,9 +19,9 @@ export default class DependencyGraphSettingTab extends PluginSettingTab {
 			.setDesc("Enable debug mode")
 			.addToggle((toggle) =>
 				toggle
-					.setValue(this.plugin.settings.debug)
+					.setValue(this.plugin.settings.enableDebug)
 					.onChange(async (value) => {
-						this.plugin.settings.debug = value;
+						this.plugin.settings.enableDebug = value;
 						await this.plugin.saveSettings();
 					})
 			);

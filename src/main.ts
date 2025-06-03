@@ -4,11 +4,11 @@ import DependencyGraphSettingTab from "./obsidian/DependencyGraphSettingTab";
 import App from "./svelte/App.svelte";
 
 interface DependencyGraphPluginSettings {
-	shouldDebug: boolean;
+	enableDebug: boolean;
 }
 
 const DEFAULT_SETTINGS: DependencyGraphPluginSettings = {
-	shouldDebug: false,
+	enableDebug: false,
 };
 
 export default class DependencyGraphPlugin extends Plugin {
@@ -82,7 +82,7 @@ export default class DependencyGraphPlugin extends Plugin {
 					return;
 				}
 
-				if (this.settings.shouldDebug) {
+				if (this.settings.enableDebug) {
 					console.log({ parentFile });
 					console.log({ forwardProperty });
 				}
@@ -98,7 +98,7 @@ export default class DependencyGraphPlugin extends Plugin {
 						app: this.app,
 						parentFile,
 						forwardProperty,
-						shouldDebug: this.settings.shouldDebug,
+						enableDebug: this.settings.enableDebug,
 					},
 				});
 			}
