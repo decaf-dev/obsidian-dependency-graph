@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+
 export interface D3Node extends d3.SimulationNodeDatum {
 	id: string;
 	x?: number;
